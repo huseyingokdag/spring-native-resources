@@ -1,0 +1,9 @@
+Elapsed time for :  jvm 1.661 ms
+Elapsed time for :  jvm 1.743 ms
+Elapsed time for :  jvm 1.749 ms
+Elapsed time for :  native-opt .250 ms
+Elapsed time for :  native-opt .058 ms
+Elapsed time for :  native-opt .042 ms
+Elapsed time for :  native .318 ms
+Elapsed time for :  native .073 ms
+Elapsed time for :  native .086 ms

@@ -1,0 +1,31 @@
+# FROM ubuntu:jammy
+# COPY target/demo /demo
+# CMD ["/demo"]
+#
+# FROM container-registry.oracle.com/os/oraclelinux:8-slim
+
+# EXPOSE 8080
+
+# COPY target/demo app
+# ENTRYPOINT ["/app"]
+# Using Oracle GraalVM for JDK 17
+FROM container-registry.oracle.com/graalvm/native-image:21-ol8 AS builder
+
+# Set the working directory to /home/app
+WORKDIR /build
+
+# Copy the source code into the image for building
+COPY . /build
+
+# Build
+RUN ./mvnw native:compile -Pnative
+
+# The deployment Image
+#FROM container-registry.oracle.com/os/oraclelinux:8-slim
+FROM amazonlinux:2
+
+EXPOSE 8080
+
+# Copy the native executable into the containers
+COPY --from=builder /build/target/demo app
+ENTRYPOINT ["/app"]
